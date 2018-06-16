@@ -33,8 +33,10 @@ activate:
 
 	ittt ls
 	movls r0, #3
-	msrls control, r0
-	isbls
+	msrls control, r0    /* Set thread mode to un-priv and use PSP   */
 
+	isbls     			/* After programming CONTROL register        */
+			  			/* the proceccor should execute ISB to flush */
+			  			/* pipeline and re-fetch instructions        */
 	bx lr
 
